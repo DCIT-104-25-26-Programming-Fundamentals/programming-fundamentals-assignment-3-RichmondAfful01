@@ -74,4 +74,141 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require('readline-sync');
 
+// -----------------------------------------------------------------------------
+// ARITHMETIC FUNCTIONS
+// -----------------------------------------------------------------------------
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        return null;
+    }
+
+    return a / b;
+}
+
+function modulus(a, b) {
+    return a % b;
+}
+
+function exponent(a, b) {
+    return a ** b;
+}
+
+// -----------------------------------------------------------------------------
+// DISPLAY MENU
+// -----------------------------------------------------------------------------
+
+function displayMenu() {
+    console.log('\n============================');
+    console.log('      SIMPLE CALCULATOR');
+    console.log('============================');
+    console.log('1. Addition');
+    console.log('2. Subtraction');
+    console.log('3. Multiplication');
+    console.log('4. Division');
+    console.log('5. Modulus');
+    console.log('6. Exponentiation');
+    console.log('7. Quit');
+}
+
+// -----------------------------------------------------------------------------
+// MAIN PROGRAM
+// -----------------------------------------------------------------------------
+
+function main() {
+    let running = true;
+
+    while (running) {
+        displayMenu();
+
+        const choice = Number(
+            readlineSync.question('Select an operation (1-7): ')
+        );
+
+        if (choice === 7) {
+            console.log('Goodbye!');
+            running = false;
+            continue;
+        }
+
+        if (choice < 1 || choice > 7 || !Number.isInteger(choice)) {
+            console.log('Error: Invalid menu choice.');
+            continue;
+        }
+
+        const num1 = Number(
+            readlineSync.question('Enter first number: ')
+        );
+
+        const num2 = Number(
+            readlineSync.question('Enter second number: ')
+        );
+
+        let result;
+
+        switch (choice) {
+            case 1:
+                result = add(num1, num2);
+                console.log(
+                    `Result: ${num1} + ${num2} = ${result.toFixed(2)}`
+                );
+                break;
+
+            case 2:
+                result = subtract(num1, num2);
+                console.log(
+                    `Result: ${num1} - ${num2} = ${result.toFixed(2)}`
+                );
+                break;
+
+            case 3:
+                result = multiply(num1, num2);
+                console.log(
+                    `Result: ${num1} * ${num2} = ${result.toFixed(2)}`
+                );
+                break;
+
+            case 4:
+                result = divide(num1, num2);
+
+                if (result === null) {
+                    console.log('Error: Cannot divide by zero.');
+                } else {
+                    console.log(
+                        `Result: ${num1} / ${num2} = ${result.toFixed(2)}`
+                    );
+                }
+                break;
+
+            case 5:
+                result = modulus(num1, num2);
+                console.log(
+                    `Result: ${num1} % ${num2} = ${result.toFixed(2)}`
+                );
+                break;
+
+            case 6:
+                result = exponent(num1, num2);
+                console.log(
+                    `Result: ${num1} ** ${num2} = ${result.toFixed(2)}`
+                );
+                break;
+        }
+    }
+}
+
+main();
